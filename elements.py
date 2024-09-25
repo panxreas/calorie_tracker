@@ -40,6 +40,11 @@ class Menu:
     def __repr__(self):
         return f'------------------------------\n| Menu for {self.name} \n------------------------------\n| Daily calories: {self.kcal}\n------------------------------'
 
+    def get_name(self):
+        return self.name
+    def get_kcal(self):
+        return self.kcal
+
     def set_frutas(self, amount):
         self.frutas = amount
     def set_verduras(self, amount):
