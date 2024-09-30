@@ -9,7 +9,8 @@ def check_user_data():
         return False
     try:
         with open(path, 'rb') as file:
-            pickle.load(file)
+            if pickle.load(file) == None:
+                return False
             return True
     except Exception as e:
         print(f'Invalid .pkl file error: {e}')
@@ -21,10 +22,25 @@ def load_user_data():
         return pickle.load(file)
 
 def save_user_data(user_data):
+    print(user_data)
     file_name = './users.pkl'
     with open(file_name, 'wb') as file:
         pickle.dump(user_data, file)
 
+def generate_user(data):
+    user_input = data
+    name = user_input['First name'] + ' '  + user_input['Last name']
+    user = Menu(name, user_input['Kcal'])
+    user.set_frutas(user_input['Fruit'])
+    user.set_verduras(user_input['Vegetables'])
+    user.set_cereales(user_input['Cereal'])
+    user.set_leguminosas(user_input['Legume'])
+    user.set_lacteos(user_input['Dairy'])
+    user.set_grasas(user_input['Fat'])
+    user.set_proteinas(user_input['Protein'])
+    return user
+
+"""
 def get_input():
     check_name = True
     check_kcal = True
@@ -108,9 +124,5 @@ def set_user_values(user):
         except ValueError:
             print('Please type only whole numbers')
     return 
+"""
 
-def create_user():
-    user_input = get_input()
-    user = Menu(user_input[0], user_input[1])
-    set_user_values(user)
-    return user
