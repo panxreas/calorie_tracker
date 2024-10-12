@@ -9,7 +9,8 @@ class Alimentos:
         self.lacteos = equivalencia['LACTEOS']
         self.grasas = equivalencia['GRASAS']
         self.proteinas = equivalencia['PROTEINAS']
-
+    
+    ### Getters
     def get_frutas(self):
         return self.frutas
     def get_verduras(self):
@@ -24,6 +25,7 @@ class Alimentos:
         return self.grasas
     def get_proteinas(self):
         return self.proteinas
+
 
 class Menu:
     def __init__(self, name, kcal):
@@ -40,11 +42,27 @@ class Menu:
     def __repr__(self):
         return f'------------------------------\n| Menu for {self.name} \n------------------------------\n| Daily calories: {self.kcal}\n------------------------------'
 
+    ### Geters ------------------------
     def get_name(self):
         return self.name
     def get_kcal(self):
         return self.kcal
+    def get_frutas(self):
+        return self.frutas
+    def get_verduras(self):
+        return self.verduras
+    def get_cereales(self):
+        return self.cereales
+    def get_leguminosas(self):
+        return self.leguminosas
+    def get_lacteos(self):
+        return self.lacteos
+    def get_grasas(self):
+        return self.grasas
+    def get_proteinas(self):
+        return self.proteinas
 
+    ### Seters ------------------------
     def set_frutas(self, amount):
         self.frutas = amount
     def set_verduras(self, amount):
