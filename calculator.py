@@ -13,6 +13,9 @@ class Meal_sets:
         # Array containing all meal objects
         self.meal_sets = []
 
+    def get_sets(self):
+        return self.meal_sets
+
     # Method for adding meals 
     def add_meal(self, meal):
         self.meal_sets.append(meal)
@@ -45,6 +48,9 @@ class Meal:
 
     def set_name(self, name):
         self.name = name
+
+    def get_name(self):
+        return self.name
 
     def __repr__(self):
         return f'{self.name} has {self.food}'

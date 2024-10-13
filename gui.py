@@ -59,7 +59,6 @@ class GUI:
 
             flag = True
             for var, value in user_data.items():
-                print(value.isalpha())
                 if value == '':
                     tk.messagebox.showwarning(title='Missing values', message=f'The {var} parameter is empty.')
                     flag = False
@@ -298,8 +297,9 @@ class GUI:
                     for children in new_meal_frame.winfo_children():
                         children.destroy()
                     new_meal_frame.destroy()
-                    print(self.meals)
-
+                    for widgets in meals_frame.winfo_children():
+                        widgets.destroy()
+                    display_meals()
 
             ## Meal class
             meal = Meal()
@@ -329,22 +329,34 @@ class GUI:
             menu_display.grid_columnconfigure(4, weight=1)
             submit_button = tk.Button(new_meal_frame, text='Save Meal', command=submit_meal)
             submit_button.grid(row=3, column=0, columnspan=6, sticky='ew', padx=(10,10), pady=(10,10))
-            print(self.meals.meal_sets)
 
             if submited:
-                for children in new_meal_frame.winfo_children():
-                    children.destroy()
-                new_meal_frame.destroy()
                 return
 
         def display_meals():
             # Meals
-            for i in self.meals.meal_sets:
-                print(i)
+            self.amount_of_meals = len(self.meals.get_sets())
+            meal_row = 0
+            for meal in self.meals.meal_sets:
+                print(meal)
+                display_frame = tk.LabelFrame(meals_frame, text=meal.get_name(), bg=self.bgr, fg=self.fgr, font=('Arial', 10))
+                display_frame.grid(row=meal_row, column=0, sticky='news')
+                for amounts in meal.get_food():
+                    number = len(meal.get_food()[amounts])
+                    group_name = tk.Label(display_frame, text=f'{amounts}: {number}', bg=self.bgr, fg=self.fgr, font=('Arial', 10), anchor='e', justify='left')
+                    group_name.grid(row=meal_row, column=0)
+                    for food in meal.get_food()[amounts]:
+                        f_name = list(food.keys())[0]
+                        food_name = tk.Label(display_frame, text=f_name, bg=self.bgr, fg=self.fgr, font=('Arial',10))
+                        food_name.grid(row=meal_row, column=1)
+                        f_portion = list(food.values())[0]
+                        food_portion = tk.Label(display_frame, text=f_portion, bg=self.bgr, fg=self.fgr, font=('Arial',10))
+                        food_portion.grid(row=meal_row, column=2)
+                        meal_row += 1
 
             # Button
             add_meal_button = tk.Button(meals_frame, text='Add meal', command=add_meal)
-            add_meal_button.grid(row=self.amount_of_meals, column=0, sticky='news')
+            add_meal_button.grid(row=meal_row, column=0, sticky='news')
         
         display_meals()
 
